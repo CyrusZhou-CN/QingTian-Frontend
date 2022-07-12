@@ -23,6 +23,8 @@ import { getPermCode } from '/@/api/sys/user';
 
 import { useMessage } from '/@/hooks/web/useMessage';
 import { PageEnum } from '/@/enums/pageEnum';
+import signalr from '/@/utils/signalr';
+import { getToken } from '/@/utils/auth';
 
 interface PermissionState {
   // Permission code list
@@ -180,6 +182,7 @@ export const usePermissionStore = defineStore({
             duration: 1,
           });
           userStore.getNoticReceiveList();
+          signalr.setup(getToken());
           // !Simulate to obtain permission codes from the background,
           // this function may only need to be executed once, and the actual project can be put at the right time by itself
           let routeList: AppRouteRecordRaw[] = [];

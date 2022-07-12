@@ -34,6 +34,7 @@
   "dependencies": {
     "@ant-design/colors": "^6.0.0",
     "@ant-design/icons-vue": "^6.1.0",
+    "@dreamonkey/vue-signalr": "^1.0.1",
     "@iconify/iconify": "^2.2.1",
     "@logicflow/core": "^1.1.21",
     "@logicflow/extension": "^1.1.21",

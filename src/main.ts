@@ -14,17 +14,12 @@ import { setupStore } from '/@/store';
 import { setupGlobDirectives } from '/@/directives';
 import { setupI18n } from '/@/locales/setupI18n';
 import { registerGlobComp } from '/@/components/registerGlobComp';
-import socket from './utils/socket';
-import { useGlobSetting } from './hooks/setting';
 
 async function bootstrap() {
   const app = createApp(App);
-  const globSetting = useGlobSetting();
   // Configure store
   // 配置 store
   setupStore(app);
-
-  app.use(socket, globSetting.apiUrl + '/hubs/chatHub');
   // Initialize internal system configuration
   // 初始化内部系统配置
   initAppConfigStore();

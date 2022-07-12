@@ -10,6 +10,7 @@ specifiers:
   '@ant-design/icons-vue': ^6.1.0
   '@commitlint/cli': ^16.3.0
   '@commitlint/config-conventional': ^16.2.4
+  '@dreamonkey/vue-signalr': ^1.0.1
   '@iconify/iconify': ^2.2.1
   '@iconify/json': ^2.1.74
   '@logicflow/core': ^1.1.21
@@ -120,6 +121,7 @@ specifiers:
 dependencies:
   '@ant-design/colors': registry.npmjs.org/@ant-design/colors/6.0.0
   '@ant-design/icons-vue': registry.npmjs.org/@ant-design/icons-vue/6.1.0_vue@3.2.37
+  '@dreamonkey/vue-signalr': registry.npmjs.org/@dreamonkey/vue-signalr/1.0.1_qwnsr644cziljgpq5prpgyni6i
   '@iconify/iconify': registry.npmjs.org/@iconify/iconify/2.2.1
   '@logicflow/core': registry.npmjs.org/@logicflow/core/1.1.21
   '@logicflow/extension': registry.npmjs.org/@logicflow/extension/1.1.21
@@ -2044,6 +2046,19 @@ packages:
     name: '@ctrl/tinycolor'
     version: 3.4.1
     engines: {node: '>=10'}
+    dev: false
+
+  registry.npmjs.org/@dreamonkey/vue-signalr/1.0.1_qwnsr644cziljgpq5prpgyni6i:
+    resolution: {integrity: sha512-sGSF2ICftxqf7zCodMQj7TPBvQcqfNqxoD8+wiplrWIGjXVzvl86FL8FhoeurHFuB5jPSRdeY3HQZzc4wfbsBg==, registry: https://registry.npmjs.com/, tarball: https://registry.npmjs.org/@dreamonkey/vue-signalr/-/vue-signalr-1.0.1.tgz}
+    id: registry.npmjs.org/@dreamonkey/vue-signalr/1.0.1
+    name: '@dreamonkey/vue-signalr'
+    version: 1.0.1
+    peerDependencies:
+      '@microsoft/signalr': ^5.0.0
+      vue: ^3.0.0
+    dependencies:
+      '@microsoft/signalr': registry.npmjs.org/@microsoft/signalr/6.0.6
+      vue: registry.npmjs.org/vue/3.2.37
     dev: false
 
   registry.npmjs.org/@eslint/eslintrc/1.3.0:

@@ -83,6 +83,8 @@
   import { isNumber } from '/@/utils/is';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { sysNoticeReadStatus } from '/@/api/sys/notice';
+  import Modal from '/@/components/Modal/src/components/Modal';
+  import { useProvideFormItemContext } from 'ant-design-vue/lib/form/FormItemContext';
   export default defineComponent({
     components: {
       [Avatar.name]: Avatar,
@@ -122,6 +124,7 @@
       const { createInfoModal } = useMessage();
       const { prefixCls } = useDesign('header-notify-list');
       const current = ref(props.currentPage || 1);
+      const modal = ref();
       const getData = computed(() => {
         const { pageSize, list } = props;
         if (pageSize === false) return [];
@@ -155,14 +158,16 @@
 
       async function handleTitleClick(item: ListItem) {
         props.onTitleClick && props.onTitleClick(item);
-        createInfoModal({
+        const op = {
           title: item.title,
           content: `${item.description}\n发布人: ${item.userName}\n发布日期: ${item.datetime}`,
-          style: {
-            //width: '600px',
-            whiteSpace: 'pre-wrap',
-          },
-        });
+          style: 'whiteSpace: pre-wrap',
+        };
+        if (!unref(modal)) {
+          modal.value = createInfoModal(op);
+        } else {
+          modal.value.update(op);
+        }
         item.titleDelete = true;
         await sysNoticeReadStatus({ id: item.id, status: 1 });
       }

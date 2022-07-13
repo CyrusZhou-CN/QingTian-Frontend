@@ -3,6 +3,7 @@ import { h } from 'vue';
 import { Tag } from 'ant-design-vue';
 import { Tinymce } from '/@/components/Tinymce/index';
 import { sysUserSelector } from '/@/api/sys/user';
+import { DescItem } from '/@/components/Description';
 
 export const columns: BasicColumn[] = [
   {
@@ -136,5 +137,34 @@ export const formSchema: FormSchema[] = [
     },
     colProps: { span: 24 },
     required: true,
+  },
+];
+export const descSchema: DescItem[] = [
+  {
+    field: 'title',
+    label: '标题',
+  },
+  {
+    field: 'type',
+    label: '类型',
+    render: (val, _) => {
+      const enable = ~~val === 1;
+      const color = enable ? 'red' : 'green';
+      const text = enable ? '通知' : '消息';
+      return h(Tag, { color: color }, () => text);
+    },
+  },
+  {
+    field: 'content',
+    label: '内容',
+    span: 24,
+  },
+  {
+    field: 'PublicUserName',
+    label: '发布人',
+  },
+  {
+    field: 'PublicTime',
+    label: '发布时间',
   },
 ];

@@ -17,12 +17,11 @@ import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { isArray } from '/@/utils/is';
 import { h } from 'vue';
 import { dateFormat } from '/@/utils/util';
-import { unReadNotice } from '/@/api/sys/noticeReceived';
-
+import { unReadNotice } from '/@/api/sys/notice';
 interface NoticeData {
   index: number;
   key: string;
-  noticeData: [];
+  list: [];
   value: number;
 }
 interface Notices {
@@ -191,21 +190,31 @@ export const useUserStore = defineStore({
       this.notices = notices;
     },
     AddNotices(notice: any) {
-      notice.publicTime = dateFormat(notice.publicTime, 'YYYY-mm-dd HH:MM:SS');
+      const { notification } = useMessage();
+      notice.datetime = dateFormat(notice.datetime, 'YYYY-mm-dd HH:MM:SS');
       const notices = this.notices;
       const temp = notices.items.filter((m) => {
-        return m.value == notice.type;
+        return m.key == notice.type;
       })[0];
       const other = notices.items.filter((m) => {
-        return m.value != notice.type;
+        return m.key != notice.type;
+      })[0];
+      temp.list.unshift(notice);
+      notification.success({
+        message: `新${temp.name}: ${notice.title}`,
+        description: `${notice.description}\n发布人: ${notice.userName}\n发布日期: ${notice.datetime}`,
+        placement: 'bottomRight',
+        style: {
+          //width: '600px',
+          whiteSpace: 'pre-wrap',
+        },
       });
-      temp.noticeData.unshift(notice);
       notices.total++;
-      if (temp.noticeData.length > 6) {
-        temp.noticeData.pop();
+      if (temp.list.length > 12) {
+        temp.list.pop();
       }
       notices.items = [];
-      notices.items.push(temp);
+      notices.items.unshift(temp);
       notices.items.unshift(other);
       notices.items.sort((obj1, obj2) => {
         return obj1.index - obj2.index;
@@ -214,7 +223,7 @@ export const useUserStore = defineStore({
     },
     async getNoticReceiveList() {
       const notices = await unReadNotice({
-        pageSize: 6,
+        pageSize: 12,
       });
       this.setNotices(notices);
     },

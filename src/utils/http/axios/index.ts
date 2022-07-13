@@ -95,7 +95,7 @@ const transform: AxiosTransform = {
       }
     }
 
-    throw new Error(timeoutMsg || t('sys.api.apiRequestFailed'));
+    throw new Error(JSON.stringify(timeoutMsg) || t('sys.api.apiRequestFailed'));
   },
 
   // 请求之前处理config

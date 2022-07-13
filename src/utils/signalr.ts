@@ -16,7 +16,6 @@ export default {
         transport: HttpTransportType.WebSockets,
       })
       .build();
-    connection.start();
     const signalr = createService({
       connection: connection,
       autoOffInsideComponentScope: true,
@@ -25,13 +24,26 @@ export default {
       },
     });
 
+    connection.onclose(async () => {
+      console.log('onClose');
+    });
+    connection.onreconnected(async () => {
+      console.log('onreconnected');
+    });
+    connection.onreconnecting(async () => {
+      console.log('onReconnecting...');
+    });
+
     signalr.on('ForceExist', async () => {
       message.success('强制线下');
       await userStore.logout();
       window.location.reload();
     });
-    signalr.on('AppendNotice', (notice: any) => {
+
+    signalr.on('AppendNotice', (notice) => {
+      console.log('AppendNotice');
       userStore.AddNotices(notice);
     });
+    connection.start();
   },
 };

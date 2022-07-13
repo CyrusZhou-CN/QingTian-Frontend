@@ -6,7 +6,10 @@ enum Api {
   edit = '/SysNotice/edit',
   delete = '/SysNotice/delete',
   detail = '/SysNotice/detail',
+  unread = '/sysNotice/unread',
+  received = '/SysNotice/received',
   changeStatus = '/SysNotice/changeStatus',
+  setReadStatus = '/SysNotice/setReadStatus',
 }
 
 /**
@@ -18,6 +21,23 @@ export function sysNoticePage(params: any) {
   return defHttp.get<any>({ url: Api.page, params });
 }
 
+/**
+ * 查询我收到的系统通知消息
+ *
+ * @author QingTian
+ */
+export function sysNoticeReceived(params: any) {
+  return defHttp.get<any>({ url: Api.received, params });
+}
+
+/**
+ * 查询我收到的通知
+ *
+ * @author QingTian
+ */
+export function unReadNotice(params: any) {
+  return defHttp.get<any>({ url: Api.unread, params });
+}
 /**
  * 通知消息列表
  *
@@ -67,4 +87,12 @@ export function sysNoticeDelete(params: any) {
  */
 export function sysNoticeChangeStatus(params: any) {
   return defHttp.post({ url: Api.changeStatus, params });
+}
+/**
+ * 修改已读状态
+ *
+ * @author QingTian
+ */
+export function sysNoticeReadStatus(params: any) {
+  return defHttp.post({ url: Api.setReadStatus, params });
 }

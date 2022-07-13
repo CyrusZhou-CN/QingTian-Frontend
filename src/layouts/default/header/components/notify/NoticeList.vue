@@ -6,6 +6,20 @@
           <template #title>
             <div class="title">
               <a-typography-paragraph
+                v-if="item.clickClose"
+                @click="handleTitleClick(item)"
+                style="width: 100%; margin-bottom: 0 !important"
+                :style="{ cursor: isTitleClickable ? 'pointer' : '' }"
+                :delete="!!item.titleDelete"
+                :ellipsis="
+                  $props.titleRows && $props.titleRows > 0
+                    ? { rows: $props.titleRows, tooltip: !!item.title }
+                    : false
+                "
+                :content="item.title"
+              />
+              <a-typography-paragraph
+                v-else
                 @click="handleTitleClick(item)"
                 style="width: 100%; margin-bottom: 0 !important"
                 :style="{ cursor: isTitleClickable ? 'pointer' : '' }"
@@ -46,6 +60,14 @@
               <div class="datetime">
                 {{ item.datetime }}
               </div>
+              <template v-if="item.titleDelete"
+                ><a-button
+                  shape="circle"
+                  type="dashed"
+                  preIcon="ant-design:eye-invisible-outlined"
+                  title="撤销已读"
+                  @click="handleNoticeReadStatusClick(item)"
+              /></template>
             </div>
           </template>
         </a-list-item-meta>
@@ -59,6 +81,8 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { List, Avatar, Tag, Typography } from 'ant-design-vue';
   import { isNumber } from '/@/utils/is';
+  import { useMessage } from '/@/hooks/web/useMessage';
+  import { sysNoticeReadStatus } from '/@/api/sys/notice';
   export default defineComponent({
     components: {
       [Avatar.name]: Avatar,
@@ -95,6 +119,7 @@
     },
     emits: ['update:currentPage'],
     setup(props, { emit }) {
+      const { createInfoModal } = useMessage();
       const { prefixCls } = useDesign('header-notify-list');
       const current = ref(props.currentPage || 1);
       const getData = computed(() => {
@@ -128,11 +153,31 @@
         }
       });
 
-      function handleTitleClick(item: ListItem) {
+      async function handleTitleClick(item: ListItem) {
         props.onTitleClick && props.onTitleClick(item);
+        createInfoModal({
+          title: item.title,
+          content: `${item.description}\n发布人: ${item.userName}\n发布日期: ${item.datetime}`,
+          style: {
+            //width: '600px',
+            whiteSpace: 'pre-wrap',
+          },
+        });
+        item.titleDelete = true;
+        await sysNoticeReadStatus({ id: item.id, status: 1 });
       }
-
-      return { prefixCls, getPagination, getData, handleTitleClick, isTitleClickable };
+      async function handleNoticeReadStatusClick(item: ListItem) {
+        item.titleDelete = false;
+        await sysNoticeReadStatus({ id: item.id, status: 0 });
+      }
+      return {
+        prefixCls,
+        getPagination,
+        getData,
+        handleTitleClick,
+        handleNoticeReadStatusClick,
+        isTitleClickable,
+      };
     },
   });
 </script>
@@ -147,7 +192,16 @@
     ::v-deep(.ant-pagination-disabled) {
       display: inline-block !important;
     }
-
+    .list-item {
+      min-width: 280px;
+      white-space: pre-wrap;
+      position: relative;
+      button {
+        position: absolute;
+        right: 10px;
+        top: 38%;
+      }
+    }
     &-item {
       padding: 6px;
       overflow: hidden;
@@ -177,7 +231,6 @@
           font-size: 12px;
           line-height: 18px;
         }
-
         .datetime {
           margin-top: 4px;
           font-size: 12px;

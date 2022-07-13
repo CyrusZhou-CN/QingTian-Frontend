@@ -7,7 +7,7 @@
           class="fix-auto-fill"
           size="large"
           v-model:value="formData.account"
-          :placeholder="t('sys.login.Account')"
+          :placeholder="t('sys.login.account')"
         />
       </FormItem>
       <FormItem name="mobile" class="enter-x">

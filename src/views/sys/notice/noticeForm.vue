@@ -1,5 +1,10 @@
 ﻿<template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle">
+    <template #footer>
+      <a-button type="primary" danger @click="handleSubmit(0)">存为草稿</a-button>
+      <a-button type="primary" @click="handleSubmit(1)">发布</a-button>
+      <a-button @click="handleCancel">取消</a-button>
+    </template>
     <BasicForm @register="registerForm" />
   </BasicModal>
 </template>
@@ -40,15 +45,17 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增通知消息' : '编辑通知消息'));
 
-      async function handleSubmit() {
+      async function handleSubmit(status: number) {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });
           // TODO custom api
           if (!unref(isUpdate)) {
+            values.status = 1;
             await sysNoticeAdd(values);
           } else {
             values.id = unref(id);
+            values.status = status;
             await sysNoticeEdit(values);
           }
           console.log(values);
@@ -58,8 +65,18 @@
           setModalProps({ confirmLoading: false });
         }
       }
+      function handleCancel() {
+        closeModal();
+        emit('success');
+      }
 
-      return { registerModal, registerForm, getTitle, handleSubmit };
+      return {
+        handleCancel,
+        registerModal,
+        registerForm,
+        getTitle,
+        handleSubmit,
+      };
     },
   });
 </script>

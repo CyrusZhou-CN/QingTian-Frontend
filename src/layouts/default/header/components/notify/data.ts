@@ -1,4 +1,5 @@
 export interface ListItem {
+  userName?: any;
   id: string;
   avatar: string;
   // 通知的标题内容

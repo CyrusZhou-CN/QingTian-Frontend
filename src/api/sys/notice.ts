@@ -13,86 +13,96 @@ enum Api {
 }
 
 /**
- * 查询通知消息
+ * @description: 查询通知消息
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticePage(params: any) {
+export const sysNoticePage = (params: any) => {
   return defHttp.get<any>({ url: Api.page, params });
-}
+};
 
 /**
- * 查询我收到的系统通知消息
+ * @description: 查询我收到的系统通知消息
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeReceived(params: any) {
+export const sysNoticeReceived = (params: any) => {
   return defHttp.get<any>({ url: Api.received, params });
-}
+};
 
 /**
- * 查询我收到的通知
+ * @description: 查询我收到的通知
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function unReadNotice(params: any) {
+export const unReadNotice = (params: any) => {
   return defHttp.get<any>({ url: Api.unread, params });
-}
+};
 /**
- * 通知消息列表
+ * @description: 通知消息列表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeList(params: any) {
+export const sysNoticeList = (params: any) => {
   return defHttp.get<any>({ url: Api.list, params });
-}
+};
 
 /**
- * 添加通知消息
+ * @description: 添加通知消息
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeAdd(params: any) {
+export const sysNoticeAdd = (params: any) => {
   return defHttp.post({ url: Api.add, params });
-}
+};
 
 /**
- * 编辑通知消息
+ * @description: 编辑通知消息
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeEdit(params: any) {
+export const sysNoticeEdit = (params: any) => {
   return defHttp.post({ url: Api.edit, params });
-}
+};
 /**
- * 通知消息详情
+ * @description: 通知消息详情
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeDetail(params: any) {
+export const sysNoticeDetail = (params: any) => {
   return defHttp.get<any>({ url: Api.detail, params });
-}
+};
 /**
- * 删除通知消息
+ * @description: 删除通知消息
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeDelete(params: any) {
+export const sysNoticeDelete = (params: any) => {
   return defHttp.post({ url: Api.delete, params });
-}
+};
 /**
- * 修改状态
+ * @description: 修改状态
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeChangeStatus(params: any) {
+export const sysNoticeChangeStatus = (params: any) => {
   return defHttp.post({ url: Api.changeStatus, params });
-}
+};
 /**
- * 修改已读状态
+ * @description: 修改已读状态
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysNoticeReadStatus(params: any) {
+export const sysNoticeReadStatus = (params: any) => {
   return defHttp.post({ url: Api.setReadStatus, params });
-}
+};

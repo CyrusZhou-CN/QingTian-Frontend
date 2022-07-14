@@ -48,11 +48,12 @@
         pagination: false,
       });
 
-      function handleEditChange(data: Recordable) {
+      const handleEditChange = (data: Recordable) => {
         console.log(data);
         data.record[data.column.dataIndex] = data.value;
-      }
-      function addPrimaryColumn() {
+      };
+
+      const addPrimaryColumn = () => {
         const data = getDataSource();
         const addRow: EditRecordRow = {
           columnDescription: '主键Id',
@@ -67,7 +68,8 @@
           isNew: true,
         };
         data.push(addRow);
-      }
+      };
+
       function addColumn() {
         const data = getDataSource();
         const addRow: EditRecordRow = {

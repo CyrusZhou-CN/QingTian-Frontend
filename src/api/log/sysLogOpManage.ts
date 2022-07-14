@@ -10,62 +10,70 @@ enum Api {
 }
 
 /**
- * 查询操作日志表
+ * @description: 查询操作日志表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpPage(params: any) {
+export const sysLogOpPage = (params: any) => {
   return defHttp.get<any>({ url: Api.page, params });
-}
+};
 
 /**
- * 操作日志表列表
+ * @description: 操作日志表列表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpList(params: any) {
+export const sysLogOpList = (params: any) => {
   return defHttp.get<any>({ url: Api.list, params });
-}
+};
 
 /**
- * 操作日志详情
+ * @description: 操作日志详情
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpDetail(params: any) {
+export const sysLogOpDetail = (params: any) => {
   return defHttp.get<any>({ url: Api.detail, params });
-}
+};
 /**
- * 添加操作日志表
+ * @description: 添加操作日志表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpAdd(params: any) {
+export const sysLogOpAdd = (params: any) => {
   return defHttp.post({ url: Api.add, params });
-}
+};
 
 /**
- * 编辑操作日志表
+ * @description: 编辑操作日志表
+ * @date 2022-07-14 15:46:03
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpEdit(params: any) {
+export const sysLogOpEdit = (params: any) => {
   return defHttp.post({ url: Api.edit, params });
-}
+};
 
 /**
- * 删除操作日志表
+ * @description: 删除操作日志表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogOpDelete(params: any) {
+export const sysLogOpDelete = (params: any) => {
   return defHttp.post({ url: Api.delete, params });
-}
+};
 /**
- * 清空异常日志
+ * @description: 清空异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function ClearLog() {
+export const ClearLog = () => {
   return defHttp.post({ url: Api.clearLog });
-}
+};

@@ -1,52 +1,70 @@
 import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
-  SysPositionPage = '/SysPosition/page',
-  SysPositionList = '/SysPosition/list',
-  SysPositionAdd = '/SysPosition/add',
-  SysPositionDelete = '/SysPosition/delete',
-  SysPositionDetail = '/SysPosition/detail',
-  SysPositionEdit = '/SysPosition/edit',
+  page = '/SysPosition/page',
+  list = '/SysPosition/list',
+  add = '/SysPosition/add',
+  delete = '/SysPosition/delete',
+  detail = '/SysPosition/detail',
+  edit = '/SysPosition/edit',
 }
 
 /**
- * @description: Get user Position based on id
+ * @description: 分页获取职位
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionPage = () => {
-  return defHttp.get({ url: Api.SysPositionPage });
+  return defHttp.get({ url: Api.page });
 };
 
 /**
- * @description: Get user Position based on id
+ * @description: 获取职位列表
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionList = () => {
-  return defHttp.get({ url: Api.SysPositionList });
+  return defHttp.get({ url: Api.list });
 };
 
 /**
- * @description: Get user Position based on id
+ * @description: 增加职位
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionAdd = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysPositionAdd, params });
+  return defHttp.post({ url: Api.add, params });
 };
 
 /**
- * @description: Get user Position based on id
+ * @description: 删除职位
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionDelete = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysPositionDelete, params });
+  return defHttp.post({ url: Api.delete, params });
 };
 
 /**
- * @description: Get user Position based on id
+ * @description: 获取职位详情
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionDetail = (params: Recordable) => {
-  return defHttp.get({ url: Api.SysPositionDetail, params });
+  return defHttp.get({ url: Api.detail, params });
 };
 
 /**
- * @description: Get user Position based on id
+ * @description: 更新职位
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysPositionEdit = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysPositionEdit, params });
+  return defHttp.post({ url: Api.edit, params });
 };

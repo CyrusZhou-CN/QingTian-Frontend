@@ -48,7 +48,7 @@
       const columnTableRef = ref<any>();
       const getTitle = computed(() => (!unref(isUpdate) ? '新增数据表' : '编辑数据表'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           setModalProps({ confirmLoading: true });
           // TODO custom api
@@ -71,7 +71,7 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
+      };
 
       return {
         isUpdate,

@@ -67,23 +67,23 @@
         },
       });
 
-      function handleCreate() {
+      const handleCreate = () => {
         openModal(true, {
           tableName: searchInfo.tableName,
           isUpdate: false,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         console.log(record);
         openModal(true, {
           tableName: searchInfo.tableName,
           record,
           isUpdate: true,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         console.log(searchInfo.tableName);
         const values = {
@@ -92,16 +92,16 @@
         };
         await columnDelete(values);
         deleteTableDataRecord(record.dbColumnName);
-      }
+      };
 
-      function handleSuccess({ isUpdate, values }) {
+      const handleSuccess = ({ isUpdate, values }) => {
         if (isUpdate) {
           const result = updateTableDataRecord(values.oldName, values);
           console.log(result);
         } else {
           reload();
         }
-      }
+      };
 
       return {
         registerTable,

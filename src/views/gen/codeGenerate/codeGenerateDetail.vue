@@ -60,7 +60,7 @@
         showIndexColumn: false,
         pagination: false,
       });
-      async function open(id: string) {
+      const open = async (id: string) => {
         detailShow.value = true;
         const datas = await sysCodeGenerateConfigList({ codeGenId: id });
         const columnInfo = getDataSource();
@@ -69,44 +69,47 @@
           element.editable = true;
           columnInfo.push(element);
         });
-      }
+      };
 
-      async function handleEditChange(data: Recordable) {
+      const handleEditChange = (data: Recordable) => {
         console.log(data);
         data.record[data.column.dataIndex] = data.value;
         if (data.value == 'fk') {
           fkClick(data.record);
         }
-      }
+      };
 
-      async function handleSubmit(record: Recordable) {
+      const handleSubmit = async (record: Recordable) => {
         console.log(record);
         const columnInfo = getDataSource();
         console.log(columnInfo);
         await sysCodeGenerateConfigEdit(columnInfo);
         message.success('修改成功');
         close('ok');
-      }
+      };
 
-      async function handleCancel(record: Recordable) {
+      const handleCancel = (record: Recordable) => {
         console.log(record);
         message.warn('放弃修改');
         close('close');
-      }
-      async function close(detail: string) {
+      };
+
+      const close = (detail: string) => {
         emit('detail', detail);
         const columnInfo = getDataSource();
         columnInfo.splice(0);
         detailShow.value = false;
-      }
-      function handleFkModalSuccess({ record }) {
+      };
+
+      const handleFkModalSuccess = ({ record }) => {
         updateTableDataRecord(record.id, record);
-      }
-      function fkClick(record: Recordable) {
+      };
+
+      const fkClick = (record: Recordable) => {
         openModal(true, {
           record,
         });
-      }
+      };
       return {
         open,
         fkClick,

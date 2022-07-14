@@ -51,15 +51,15 @@
         },
       });
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await sysOnlineUserForceExist(record);
         handleSuccess();
-      }
+      };
 
-      function handleSuccess() {
+      const handleSuccess = () => {
         reload();
-      }
+      };
 
       return {
         registerTable,

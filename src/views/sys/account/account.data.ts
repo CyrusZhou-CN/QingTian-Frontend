@@ -136,6 +136,12 @@ export const accountFormSchema: FormSchema[] = [
     component: 'InputTextArea',
     colProps: { span: 24 },
   },
+  {
+    label: '',
+    field: 'sysEmpParam',
+    component: 'Input',
+    slot: 'sysEmpParam',
+  },
 ];
 
 export const personSchema: DescItem[] = [

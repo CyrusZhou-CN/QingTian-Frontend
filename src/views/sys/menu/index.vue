@@ -71,41 +71,41 @@
         },
       });
 
-      function handleCreate() {
+      const handleCreate = () => {
         openDrawer(true, {
           isUpdate: false,
           success: handleSuccess,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         openDrawer(true, {
           record,
           isUpdate: true,
           success: handleSuccess,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await sysMenuDelete(record);
         handleSuccess();
-      }
+      };
 
-      function handleSuccess() {
+      const handleSuccess = () => {
         reload();
-      }
+      };
 
-      function onFetchSuccess() {
+      const onFetchSuccess = () => {
         // 演示默认展开所有表项
         // onExpandAll();
-      }
-      function onExpandAll() {
+      };
+      const onExpandAll = () => {
         nextTick(expandAll);
-      }
-      function onCollapseAll() {
+      };
+      const onCollapseAll = () => {
         nextTick(collapseAll);
-      }
+      };
       return {
         registerTable,
         registerDrawer,

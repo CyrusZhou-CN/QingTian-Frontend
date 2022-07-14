@@ -37,7 +37,7 @@
         });
       });
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           setModalProps({ confirmLoading: true });
           // TODO custom api
@@ -49,8 +49,9 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
-      function ToHump(value: string) {
+      };
+
+      const ToHump = (value: string) => {
         const strs = value.split('_');
         let str = '';
         for (let j = 0; j < strs.length; j++) {
@@ -61,7 +62,8 @@
           str += temp2;
         }
         return { entityName: str };
-      }
+      };
+
       return {
         registerForm,
         registerModal,

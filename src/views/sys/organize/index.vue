@@ -70,30 +70,30 @@
         },
       });
 
-      function handleCreate() {
+      const handleCreate = () => {
         openModal(true, {
           isUpdate: false,
           success: handleSuccess,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         openModal(true, {
           record,
           isUpdate: true,
           success: handleSuccess,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await sysOrganizeDelete(record);
         handleSuccess();
-      }
+      };
 
-      function handleSuccess() {
+      const handleSuccess = () => {
         reload();
-      }
+      };
 
       return {
         registerTable,

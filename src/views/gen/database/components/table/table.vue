@@ -85,41 +85,41 @@
         },
       });
 
-      function rowClick(record, index) {
+      const rowClick = (record, index) => {
         clearSelectedRowKeys();
         setSelectedRowKeys([record.name]);
         rowId.value = record.name;
         console.log(index);
         emit('select', record.name);
-      }
+      };
 
       function setRowClass(record: any) {
         return record.name === rowId.value ? 'ant-table-row-selected' : '';
       }
 
-      function handleCreate() {
+      const handleCreate = () => {
         openModal(true, {
           isUpdate: false,
           success: handleSuccess,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         console.log(record);
         openModal(true, {
           record,
           isUpdate: true,
           success: handleSuccess,
         });
-      }
+      };
 
-      async function handleDelete(record: DbTableInfo) {
+      const handleDelete = async (record: DbTableInfo) => {
         console.log(record);
         await tableDelete(record);
         // deleteTableDataRecord(record.name); // 不刷新删除行
         reload();
-      }
-      function handleSuccess({ isUpdate, values }) {
+      };
+      const handleSuccess = ({ isUpdate, values }) => {
         if (isUpdate) {
           const result = updateTableDataRecord(values.oldName, values);
           clearSelectedRowKeys();
@@ -128,21 +128,24 @@
         } else {
           reload();
         }
-      }
+      };
 
-      function handleCreateEntity(record: Recordable) {
+      const handleCreateEntity = (record: Recordable) => {
         openCreateEntityModal(true, {
           record,
           success: handleCreateEntitySuccess,
         });
-      }
-      function handleCreateEntitySuccess({ values }) {
+      };
+
+      const handleCreateEntitySuccess = ({ values }) => {
         console.log(values);
         reload();
-      }
-      function handleColumnsChange(record: any) {
+      };
+
+      const handleColumnsChange = (record: any) => {
         console.log(record);
-      }
+      };
+
       return {
         registerTable,
         registerModal,

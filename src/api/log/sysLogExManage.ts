@@ -10,63 +10,70 @@ enum Api {
 }
 
 /**
- * 查询异常日志
+ * @description: 查询异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExPage(params: any) {
+export const sysLogExPage = (params: any) => {
   return defHttp.get<any>({ url: Api.page, params });
-}
+};
 
 /**
- * 异常日志列表
+ * @description: 异常日志列表
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExList(params: any) {
+export const sysLogExList = (params: any) => {
   return defHttp.get<any>({ url: Api.list, params });
-}
+};
 
 /**
- * 异常日志详情
+ * @description: 异常日志详情
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExDetail(params: any) {
+export const sysLogExDetail = (params: any) => {
   return defHttp.get<any>({ url: Api.detail, params });
-}
+};
 /**
- * 添加异常日志
+ * @description: 添加异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExAdd(params: any) {
+export const sysLogExAdd = (params: any) => {
   return defHttp.post({ url: Api.add, params });
-}
+};
 
 /**
- * 编辑异常日志
+ * @description: 编辑异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExEdit(params: any) {
+export const sysLogExEdit = (params: any) => {
   return defHttp.post({ url: Api.edit, params });
-}
+};
 
 /**
- * 删除异常日志
+ * @description: 删除异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function sysLogExDelete(params: any) {
+export const sysLogExDelete = (params: any) => {
   return defHttp.post({ url: Api.delete, params });
-}
+};
 
 /**
- * 清空异常日志
+ * @description: 清空异常日志
  *
  * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function ClearLog() {
+export const ClearLog = () => {
   return defHttp.post({ url: Api.clearLog });
-}
+};

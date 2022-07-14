@@ -1,60 +1,81 @@
 import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
-  SysOrganizePage = '/SysOrganize/page',
-  SysOrganizeTree = '/SysOrganize/tree',
-  SysOrganizeList = '/SysOrganize/list',
-  SysOrganizeAdd = '/SysOrganize/add',
-  SysOrganizeDelete = '/SysOrganize/delete',
-  SysOrganizeDetail = '/SysOrganize/detail',
-  SysOrganizeEdit = '/SysOrganize/edit',
+  page = '/SysOrganize/page',
+  tree = '/SysOrganize/tree',
+  list = '/SysOrganize/list',
+  add = '/SysOrganize/add',
+  delete = '/SysOrganize/delete',
+  detail = '/SysOrganize/detail',
+  edit = '/SysOrganize/edit',
 }
 
 /**
- * @description: Get user Organize based on id
+ * @description: 分页查询组织机构
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizePage = () => {
-  return defHttp.get({ url: Api.SysOrganizePage });
+  return defHttp.get({ url: Api.page });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 获取组织机构树
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeTree = () => {
-  return defHttp.get({ url: Api.SysOrganizeTree });
+  return defHttp.get({ url: Api.tree });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 获取组织机构列表
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeList = () => {
-  return defHttp.get({ url: Api.SysOrganizeList });
+  return defHttp.get({ url: Api.list });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 增加组织机构
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeAdd = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysOrganizeAdd, params });
+  return defHttp.post({ url: Api.add, params });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 删除组织机构
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeDelete = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysOrganizeDelete, params });
+  return defHttp.post({ url: Api.delete, params });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 获取组织机构信息
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeDetail = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysOrganizeDetail, params });
+  return defHttp.post({ url: Api.detail, params });
 };
 
 /**
- * @description: Get user Organize based on id
+ * @description: 更新组织机构
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysOrganizeEdit = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysOrganizeEdit, params });
+  return defHttp.post({ url: Api.edit, params });
 };

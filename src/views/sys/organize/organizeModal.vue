@@ -44,7 +44,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增组织' : '编辑组织'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });
@@ -61,7 +61,7 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
+      };
 
       return { registerModal, registerForm, getTitle, handleSubmit };
     },

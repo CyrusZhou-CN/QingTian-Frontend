@@ -7,11 +7,14 @@ const { uploadUrl = '' } = useGlobSetting();
 
 /**
  * @description: Upload interface
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
-export function uploadApi(
+export const uploadApi = (
   params: UploadFileParams,
   onUploadProgress: (progressEvent: ProgressEvent) => void,
-) {
+) => {
   return defHttp.uploadFile<UploadApiResult>(
     {
       url: uploadUrl,
@@ -19,4 +22,4 @@ export function uploadApi(
     },
     params,
   );
-}
+};

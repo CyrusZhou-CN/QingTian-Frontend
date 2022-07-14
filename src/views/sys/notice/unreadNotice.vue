@@ -50,17 +50,17 @@
         },
       });
 
-      function handleDetail(record: Recordable) {
+      const handleDetail = (record: Recordable) => {
         indexShow.value = false;
         openDetail.value.openDetail(record.id);
-      }
-      function handleCloseDetail(record: Recordable) {
+      };
+      const handleCloseDetail = (record: Recordable) => {
         console.log(record);
         indexShow.value = true;
-      }
-      function handleSuccess() {
+      };
+      const handleSuccess = () => {
         reload();
-      }
+      };
 
       return {
         registerTable,

@@ -1,60 +1,70 @@
 import { defHttp } from '/@/utils/http/axios';
 
 enum Api {
-  SysRoleStatus = '/SysRole/setRoleStatus',
-  SysRoleListByPage = '/SysRole/page',
-  SysRoleList = '/SysRole/list',
-  SysRoleAdd = '/SysRole/add',
-  SysRoleDelete = '/SysRole/delete',
-  SysRoleDetail = '/SysRole/detail',
-  SysRoleEdit = '/SysRole/edit',
+  setRoleStatus = '/SysRole/setRoleStatus',
+  page = '/SysRole/page',
+  add = '/SysRole/add',
+  delete = '/SysRole/delete',
+  detail = '/SysRole/detail',
+  edit = '/SysRole/edit',
 }
 
 /**
- * @description: Get user menu based on id
+ * @description: 改变状态
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const setRoleStatus = (Id: string, newStatus: number) => {
-  return defHttp.get({ url: Api.SysRoleStatus, params: { Id, newStatus } });
+  return defHttp.get({ url: Api.setRoleStatus, params: { Id, newStatus } });
 };
 
 /**
- * @description: Get user Role based on id
+ * @description: 分页获取角色列表
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysRoleListByPage = () => {
-  return defHttp.get({ url: Api.SysRoleListByPage });
+  return defHttp.get({ url: Api.page });
 };
 
 /**
- * @description: Get user Role based on id
- */
-export const sysRoleList = () => {
-  return defHttp.get({ url: Api.SysRoleList });
-};
-
-/**
- * @description: Get user Role based on id
+ * @description: 添加角色
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysRoleAdd = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysRoleAdd, params });
+  return defHttp.post({ url: Api.add, params });
 };
 
 /**
- * @description: Get user Role based on id
+ * @description: 删除角色
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysRoleDelete = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysRoleDelete, params });
+  return defHttp.post({ url: Api.delete, params });
 };
 
 /**
- * @description: Get user Role based on id
+ * @description: 获取角色详情
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysRoleDetail = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysRoleDetail, params });
+  return defHttp.post({ url: Api.detail, params });
 };
 
 /**
- * @description: Get user Role based on id
+ * @description: 更新角色
+ *
+ * @author QingTian
+ * @date 2022-07-14 15:46:03
  */
 export const sysRoleEdit = (params: Recordable) => {
-  return defHttp.post({ url: Api.SysRoleEdit, params });
+  return defHttp.post({ url: Api.edit, params });
 };

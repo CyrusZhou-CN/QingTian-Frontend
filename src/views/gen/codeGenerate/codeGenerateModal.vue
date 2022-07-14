@@ -50,7 +50,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增代码生成配置' : '编辑代码生成配置'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });
@@ -66,7 +66,7 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
+      };
 
       return { registerModal, registerForm, getTitle, handleSubmit };
     },

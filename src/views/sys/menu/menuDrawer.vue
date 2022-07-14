@@ -58,7 +58,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增菜单' : '编辑菜单'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
@@ -75,7 +75,7 @@
         } finally {
           setDrawerProps({ confirmLoading: false });
         }
-      }
+      };
 
       return { registerDrawer, registerForm, getTitle, handleSubmit };
     },

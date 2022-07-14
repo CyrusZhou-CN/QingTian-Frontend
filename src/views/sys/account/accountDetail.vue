@@ -59,19 +59,19 @@
       const getTitle = computed(() => '{' + unref(personData).realName + '} 的资料');
       // TODO
       // 本页代码仅作演示，实际应当通过userId从接口获得用户的相关资料
-      async function openAccountDetail(userId) {
+      const openAccountDetail = async (userId) => {
         accountdetailShow.value = true;
         const res = await getAccountDetail(userId);
         // 设置Tab的标题（不会影响页面标题）
         personData.value = res;
         setTitle('详情：' + res.realName);
-      }
-      async function handleCancel(record: Recordable) {
+      };
+      const handleCancel = (record: Recordable) => {
         console.log(record);
         accountdetailShow.value = false;
         setTitle('用户管理');
         emit('detail', 'close');
-      }
+      };
       return {
         openAccountDetail,
         getTitle,

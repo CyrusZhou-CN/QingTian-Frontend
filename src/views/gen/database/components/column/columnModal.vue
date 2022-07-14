@@ -45,7 +45,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增数据列' : '编辑数据列'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           setModalProps({ confirmLoading: true });
           // TODO custom api
@@ -64,7 +64,7 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
+      };
 
       return {
         isUpdate,

@@ -47,7 +47,7 @@
         }
       });
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });
@@ -62,7 +62,7 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
+      };
 
       return { registerModal, registerForm, handleSubmit };
     },

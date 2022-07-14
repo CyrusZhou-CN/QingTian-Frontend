@@ -45,7 +45,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增通知消息' : '编辑通知消息'));
 
-      async function handleSubmit(status: number) {
+      const handleSubmit = async (status: number) => {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });
@@ -64,11 +64,12 @@
         } finally {
           setModalProps({ confirmLoading: false });
         }
-      }
-      function handleCancel() {
+      };
+
+      const handleCancel = () => {
         closeModal();
         emit('success');
-      }
+      };
 
       return {
         handleCancel,

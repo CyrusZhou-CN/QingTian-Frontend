@@ -65,7 +65,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增角色' : '编辑角色'));
 
-      async function handleSubmit() {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
@@ -82,7 +82,7 @@
         } finally {
           setDrawerProps({ confirmLoading: false });
         }
-      }
+      };
 
       return {
         registerDrawer,

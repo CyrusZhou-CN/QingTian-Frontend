@@ -94,47 +94,48 @@
         },
       });
 
-      function rowClick(record, index) {
+      const rowClick = (record, index) => {
         clearSelectedRowKeys();
         setSelectedRowKeys([record.name]);
         rowId.value = record.name;
         console.log('row:' + index);
         emit('select', record.name);
-      }
+      };
 
       function setRowClass(record: Recordable) {
         return record.name === rowId.value ? 'ant-table-row-selected' : '';
       }
 
-      function handleCreate() {
+      const handleCreate = () => {
         openModal(true, {
           isUpdate: false,
           success: handleSuccess,
         });
-      }
+      };
 
-      function handleConfig(record: Recordable) {
+      const handleConfig = (record: Recordable) => {
         console.log(record);
         isShow.value = false;
         openDetail.value.open(record.id);
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         console.log(record);
         openModal(true, {
           record,
           isUpdate: true,
           success: handleSuccess,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await codeGenerateDelete([{ id: record.id }]);
         deleteTableDataRecord(record.id); // 不刷新删除行
         reload();
-      }
-      async function runLocalCodeGenerate(record: Recordable) {
+      };
+
+      const runLocalCodeGenerate = async (record: Recordable) => {
         const res = await codeGenerateRunLocal(record);
         console.log(res);
         if (res.success) {
@@ -142,12 +143,14 @@
         } else {
           message.error('生成失败：' + res.message);
         }
-      }
-      function handleCloseDetail(record: Recordable) {
+      };
+
+      const handleCloseDetail = (record: Recordable) => {
         console.log(record);
         isShow.value = true;
-      }
-      function handleSuccess({ isUpdate, values }) {
+      };
+
+      const handleSuccess = ({ isUpdate, values }) => {
         if (isUpdate) {
           const result = updateTableDataRecord(values.id, values);
           clearSelectedRowKeys();
@@ -156,7 +159,8 @@
         } else {
           reload();
         }
-      }
+      };
+
       return {
         registerTable,
         registerModal,

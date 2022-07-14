@@ -5,6 +5,12 @@
         <a-button preIcon="ant-design:user-add-outlined" type="primary" @click="handleCreate"
           >新增账号</a-button
         >
+        <a-button preIcon="ant-design:cloud-download-outlined" @click="handleUserExport"
+          >导出</a-button
+        >
+        <a-upload name="file" :multiple="false" @change="handleUserImport">
+          <a-button preIcon="ant-design:cloud-upload-outlined"> 导入 </a-button>
+        </a-upload>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -40,15 +46,13 @@
 </template>
 <script lang="ts">
   import { defineComponent, reactive, ref } from 'vue';
-
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { getAccountList, sysUserDelete } from '/@/api/sys/user';
-
+  import { getAccountList, sysUserDelete, sysUserExport, sysUserImport } from '/@/api/sys/user';
   import { useModal } from '/@/components/Modal';
   import AccountModal from './accountModal.vue';
-
   import { columns, searchFormSchema } from './account.data';
   import AccountDetail from './accountDetail.vue';
+  import { message } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'AccountManagement',
@@ -82,29 +86,29 @@
         },
       });
 
-      function handleCreate() {
+      const handleCreate = () => {
         openModal(true, {
           isUpdate: false,
           success: handleSuccess,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         console.log(record);
         openModal(true, {
           record,
           isUpdate: true,
           success: handleSuccess,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await sysUserDelete(record);
         reload();
-      }
+      };
 
-      function handleSuccess({ isUpdate, values }) {
+      const handleSuccess = ({ isUpdate, values }) => {
         if (isUpdate) {
           // 演示不刷新表格直接更新内部数据。
           // 注意：updateTableDataRecord要求表格的rowKey属性为string并且存在于每一行的record的keys中
@@ -113,18 +117,53 @@
         } else {
           reload();
         }
-      }
+      };
 
-      function handleOpenDetail(record: Recordable) {
+      const handleOpenDetail = (record: Recordable) => {
         console.log(record);
         accountIndexShow.value = false;
         openDetail.value.openAccountDetail(record.id);
-      }
-      function handleCloseDetail(record: Recordable) {
+      };
+      const handleCloseDetail = (record: Recordable) => {
         console.log(record);
         accountIndexShow.value = true;
-      }
+      };
 
+      const handleUserExport = async () => {
+        const res = await sysUserExport(searchInfo);
+        downLoadFile(res);
+      };
+
+      const downLoadFile = (res: any) => {
+        var blob = new Blob([res.data], {
+          type: 'application/octet-stream;charset=UTF-8',
+        });
+        var contentDisposition = res.headers['content-disposition'];
+        var patt = new RegExp('filename=([^;]+\\.[^\\.;]+);*');
+        var result = patt.exec(contentDisposition);
+        var filename = result ? result[1] : '666.xlsx';
+        var downloadElement = document.createElement('a');
+        var href = window.URL.createObjectURL(blob); // 创建下载的链接
+        var reg = /^["](.*)["]$/g;
+        downloadElement.style.display = 'none';
+        downloadElement.href = href;
+        downloadElement.download = decodeURI(filename.replace(reg, '$1')); // 下载后文件名
+        document.body.appendChild(downloadElement);
+        downloadElement.click(); // 点击下载
+        document.body.removeChild(downloadElement); // 下载完成移除元素
+        window.URL.revokeObjectURL(href);
+      };
+      const handleUserImport = async (info: any) => {
+        await sysUserImport(info);
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      };
       return {
         registerTable,
         registerModal,
@@ -134,6 +173,9 @@
         handleSuccess,
         handleCloseDetail,
         handleOpenDetail,
+        handleUserExport,
+        handleUserImport,
+        sysUserImport,
         accountIndexShow,
         openDetail,
         searchInfo,

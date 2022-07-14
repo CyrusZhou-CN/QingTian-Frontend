@@ -64,28 +64,28 @@
         },
       });
 
-      function handleCreate() {
+      const handleCreate = () => {
         openDrawer(true, {
           isUpdate: false,
         });
-      }
+      };
 
-      function handleEdit(record: Recordable) {
+      const handleEdit = (record: Recordable) => {
         openDrawer(true, {
           record,
           isUpdate: true,
         });
-      }
+      };
 
-      async function handleDelete(record: Recordable) {
+      const handleDelete = async (record: Recordable) => {
         console.log(record);
         await sysRoleDelete(record);
         handleSuccess();
-      }
+      };
 
-      function handleSuccess() {
+      const handleSuccess = () => {
         reload();
-      }
+      };
 
       return {
         registerTable,

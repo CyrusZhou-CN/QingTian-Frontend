@@ -127,6 +127,7 @@ export function useFormEvents({
     }
     schemaRef.value = schemaList;
   }
+
   /**
    * @description: Delete based on field name
    */
@@ -139,6 +140,7 @@ export function useFormEvents({
       }
     }
   }
+
   /**
    * @description: Insert after a certain field, if not insert the last
    */

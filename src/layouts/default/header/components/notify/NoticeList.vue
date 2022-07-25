@@ -83,8 +83,7 @@
   import { isNumber } from '/@/utils/is';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { sysNoticeReadStatus } from '/@/api/sys/notice';
-  import Modal from '/@/components/Modal/src/components/Modal';
-  import { useProvideFormItemContext } from 'ant-design-vue/lib/form/FormItemContext';
+
   export default defineComponent({
     components: {
       [Avatar.name]: Avatar,
@@ -197,16 +196,19 @@
     ::v-deep(.ant-pagination-disabled) {
       display: inline-block !important;
     }
+
     .list-item {
       min-width: 280px;
       white-space: pre-wrap;
       position: relative;
+
       button {
         position: absolute;
         right: 10px;
         top: 38%;
       }
     }
+
     &-item {
       padding: 6px;
       overflow: hidden;
@@ -236,6 +238,7 @@
           font-size: 12px;
           line-height: 18px;
         }
+
         .datetime {
           margin-top: 4px;
           font-size: 12px;

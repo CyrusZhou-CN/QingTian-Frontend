@@ -56,7 +56,7 @@
 
   import { Checkbox, Form, Input, Row, Col, Button } from 'ant-design-vue';
 
-  import LoginFormTitle from './loginFormTitle.vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
 
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useMessage } from '/@/hooks/web/useMessage';

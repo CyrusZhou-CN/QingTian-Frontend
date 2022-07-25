@@ -1,11 +1,13 @@
 <template>
   <div :class="prefixCls" class="relative w-full h-full px-4">
-    <AppLocalePicker
-      class="absolute text-white top-4 right-4 enter-x xl:text-gray-600"
-      :showText="false"
-      v-if="!sessionTimeout && showLocale"
-    />
-    <AppDarkModeToggle class="absolute top-3 right-7 enter-x" v-if="!sessionTimeout" />
+    <div class="flex items-center absolute right-4 top-4">
+      <AppDarkModeToggle class="enter-x mr-2" v-if="!sessionTimeout" />
+      <AppLocalePicker
+        class="text-white enter-x xl:text-gray-600"
+        :show-text="false"
+        v-if="!sessionTimeout && showLocale"
+      />
+    </div>
 
     <span class="-enter-x xl:hidden">
       <AppLogo :alwaysShowTitle="true" />
@@ -24,7 +26,7 @@
             <div class="mt-10 font-medium text-white -enter-x">
               <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span>
             </div>
-            <div class="mt-5 font-normal text-white text-md dark:text-gray-500 -enter-x">
+            <div class="mt-5 font-normal text-white dark:text-gray-500 -enter-x">
               {{ t('sys.login.signInDesc') }}
             </div>
           </div>
@@ -49,11 +51,11 @@
   import { computed } from 'vue';
   import { AppLogo } from '/@/components/Application';
   import { AppLocalePicker, AppDarkModeToggle } from '/@/components/Application';
-  import LoginForm from './loginForm.vue';
-  import ForgetPasswordForm from './forgetPasswordForm.vue';
-  import RegisterForm from './registerForm.vue';
-  import MobileForm from './mobileForm.vue';
-  import QrCodeForm from './qrCodeForm.vue';
+  import LoginForm from './LoginForm.vue';
+  import ForgetPasswordForm from './ForgetPasswordForm.vue';
+  import RegisterForm from './RegisterForm.vue';
+  import MobileForm from './MobileForm.vue';
+  import QrCodeForm from './QrCodeForm.vue';
   import { useGlobSetting } from '/@/hooks/setting';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -166,7 +168,7 @@
         }
 
         img {
-          width: 68px;
+          width: 48px;
         }
       }
     }

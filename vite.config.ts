@@ -64,7 +64,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       pure: VITE_DROP_CONSOLE ? ['console.log', 'debugger'] : [],
     },
     build: {
-      // Transforming async generator functions to the configured target environment ("es2015") is not supported yet
       target: 'es2022',
       cssTarget: 'chrome80',
       outDir: OUTPUT_DIR,

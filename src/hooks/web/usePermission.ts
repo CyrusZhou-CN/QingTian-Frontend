@@ -67,9 +67,9 @@ export function usePermission() {
 
     if ([PermissionModeEnum.ROUTE_MAPPING, PermissionModeEnum.ROLE].includes(permMode)) {
       if (!isArray(value)) {
-        return userStore.sysRoleList?.includes(value as RoleEnum);
+        return userStore.getRoleList?.includes(value as RoleEnum);
       }
-      return (intersection(value, userStore.sysRoleList) as RoleEnum[]).length > 0;
+      return (intersection(value, userStore.getRoleList) as RoleEnum[]).length > 0;
     }
 
     if (PermissionModeEnum.BACK === permMode) {

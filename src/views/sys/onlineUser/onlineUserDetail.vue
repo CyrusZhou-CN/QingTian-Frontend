@@ -39,7 +39,7 @@
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增在线用户' : '编辑在线用户'));
 
-      const handleSubmit = () => {
+      const handleSubmit = async () => {
         try {
           const values = await validate();
           setModalProps({ confirmLoading: true });

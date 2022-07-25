@@ -290,6 +290,7 @@ export function useDataSource(
       rawDataSourceRef.value = res;
 
       const isArrayResult = Array.isArray(res);
+
       let resultItems: Recordable[] = isArrayResult ? res : get(res, listField);
       const resultTotal: number = isArrayResult ? res.length : get(res, totalField);
 
@@ -299,7 +300,6 @@ export function useDataSource(
         if (current > currentTotalPage) {
           setPagination({
             current: currentTotalPage,
-            timestamp: res?.timestamp,
           });
           return await fetch(opt);
         }
@@ -311,18 +311,15 @@ export function useDataSource(
       dataSourceRef.value = resultItems;
       setPagination({
         total: resultTotal || 0,
-        timestamp: res.timestamp || 0,
       });
       if (opt && opt.page) {
         setPagination({
           current: opt.page || 1,
-          timestamp: res.timestamp || 0,
         });
       }
       emit('fetch-success', {
         items: unref(resultItems),
         total: resultTotal,
-        timestamp: res.timestamp || 0,
       });
       return resultItems;
     } catch (error) {
@@ -330,7 +327,6 @@ export function useDataSource(
       dataSourceRef.value = [];
       setPagination({
         total: 0,
-        timestamp: 0,
       });
     } finally {
       setLoading(false);

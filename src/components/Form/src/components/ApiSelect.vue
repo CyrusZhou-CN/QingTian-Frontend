@@ -86,6 +86,7 @@
           return prev;
         }, [] as OptionsItem[]);
       });
+
       watchEffect(() => {
         props.immediate && !props.alwaysLoad && fetch();
       });

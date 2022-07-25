@@ -45,15 +45,13 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
     if (!unref(show) || (isBoolean(pagination) && !pagination)) {
       return false;
     }
+
     return {
       current: 1,
       pageSize: PAGE_SIZE,
       size: 'small',
       defaultPageSize: PAGE_SIZE,
-      showTotal: (total) =>
-        t('component.table.timestamp', { timestamp: unref(configRef)?.timestamp }) +
-        ' | ' +
-        t('component.table.total', { total }),
+      showTotal: (total) => t('component.table.total', { total }),
       showSizeChanger: true,
       pageSizeOptions: PAGE_SIZE_OPTIONS,
       itemRender: itemRender,

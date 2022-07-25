@@ -17,9 +17,11 @@ import { registerGlobComp } from '/@/components/registerGlobComp';
 
 async function bootstrap() {
   const app = createApp(App);
+
   // Configure store
   // 配置 store
   setupStore(app);
+
   // Initialize internal system configuration
   // 初始化内部系统配置
   initAppConfigStore();

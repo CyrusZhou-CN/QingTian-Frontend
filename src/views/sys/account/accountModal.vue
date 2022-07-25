@@ -84,7 +84,9 @@
       });
 
       const getTitle = computed(() => (!unref(isUpdate) ? '新增账号' : '编辑账号'));
-      const initrOrgName = (value) => {};
+      const initrOrgName = (e: any) => {
+        console.info(e);
+      };
       const handleSubmit = async () => {
         try {
           const values = await validate();

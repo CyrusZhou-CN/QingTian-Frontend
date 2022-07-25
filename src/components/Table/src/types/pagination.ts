@@ -26,12 +26,7 @@ export interface PaginationProps {
    * @type number
    */
   total?: number;
-  /**
-   * 耗时
-   * @default 0
-   * @type number
-   */
-  timestamp?: number;
+
   /**
    * default initial page number
    * @default 1
@@ -91,6 +86,7 @@ export interface PaginationProps {
    * @type Function
    */
   showTotal?: (total: number, range: [number, number]) => any;
+
   /**
    * specify the size of Pagination, can be set to small
    * @default ''

@@ -28,9 +28,9 @@ const { createMessage, createErrorModal } = useMessage();
  */
 const transform: AxiosTransform = {
   /**
-   * @description: 处理请求数据。如果数据不是预期格式，可直接抛出错误
+   * @description: 处理响应数据。如果数据不是预期格式，可直接抛出错误
    */
-  transformRequestHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
+  transformResponseHook: (res: AxiosResponse<Result>, options: RequestOptions) => {
     const { t } = useI18n();
     const { isTransformResponse, isReturnNativeResponse } = options;
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
@@ -50,7 +50,7 @@ const transform: AxiosTransform = {
       throw new Error(t('sys.api.apiRequestFailed'));
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message, timestamp } = data;
+    const { code, result, message } = data;
 
     // 这里逻辑可以根据项目进行修改
     const hasSuccess =
@@ -60,9 +60,6 @@ const transform: AxiosTransform = {
     if (hasSuccess) {
       if (!result) {
         return data;
-      }
-      if (timestamp) {
-        result.timestamp = timestamp;
       }
       return result;
     }
@@ -124,7 +121,11 @@ const transform: AxiosTransform = {
     } else {
       if (!isString(params)) {
         formatDate && formatRequestDate(params);
-        if (Reflect.has(config, 'data') && config.data && Object.keys(config.data).length > 0) {
+        if (
+          Reflect.has(config, 'data') &&
+          config.data &&
+          (Object.keys(config.data).length > 0 || config.data instanceof FormData)
+        ) {
           config.data = data;
           config.params = params;
         } else {
@@ -217,10 +218,12 @@ const transform: AxiosTransform = {
 
 function createAxios(opt?: Partial<CreateAxiosOptions>) {
   return new VAxios(
+    // 深度合并
     deepMerge(
       {
         // See https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#authentication_schemes
         // authentication schemes，e.g: Bearer
+        // authenticationScheme: 'Bearer',
         authenticationScheme: 'Bearer',
         timeout: 10 * 1000,
         // 基础接口地址
@@ -267,3 +270,11 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
   );
 }
 export const defHttp = createAxios();
+
+// other api url
+// export const otherHttp = createAxios({
+//   requestOptions: {
+//     apiUrl: 'xxx',
+//     urlPrefix: 'xxx',
+//   },
+// });

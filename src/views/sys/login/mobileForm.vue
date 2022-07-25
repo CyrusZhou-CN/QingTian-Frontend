@@ -34,7 +34,7 @@
   import { reactive, ref, computed, unref } from 'vue';
   import { Form, Input, Button } from 'ant-design-vue';
   import { CountdownInput } from '/@/components/CountDown';
-  import LoginFormTitle from './loginFormTitle.vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
 

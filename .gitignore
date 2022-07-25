@@ -27,6 +27,11 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+package-lock.json
+pnpm-lock.yaml
 /package-lock.json
 src/views/application
 src/api/application
+yarn.lock
+pnpm-lock.yaml

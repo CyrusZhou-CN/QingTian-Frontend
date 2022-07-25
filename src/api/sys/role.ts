@@ -25,7 +25,7 @@ export const setRoleStatus = (Id: string, newStatus: number) => {
  * @author QingTian
  * @date 2022-07-14 15:46:03
  */
-export const sysRoleListByPage = () => {
+export const getRoleListByPage = () => {
   return defHttp.get({ url: Api.page });
 };
 

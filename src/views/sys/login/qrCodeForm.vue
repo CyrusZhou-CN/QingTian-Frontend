@@ -16,7 +16,7 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import LoginFormTitle from './loginFormTitle.vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
   import { Button, Divider } from 'ant-design-vue';
   import { QrCode } from '/@/components/Qrcode/index';
   import { useI18n } from '/@/hooks/web/useI18n';

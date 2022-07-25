@@ -32,7 +32,7 @@
   import { defineComponent } from 'vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { sysRoleListByPage, sysRoleDelete } from '/@/api/sys/role';
+  import { getRoleListByPage, sysRoleDelete } from '/@/api/sys/role';
 
   import { useDrawer } from '/@/components/Drawer';
   import RoleDrawer from './roleDrawer.vue';
@@ -46,7 +46,7 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: '角色列表',
-        api: sysRoleListByPage,
+        api: getRoleListByPage,
         columns,
         formConfig: {
           labelWidth: 120,

@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <template v-for="src in imgList" :key="src">
-      <img :src="src" v-show="false" />
+      <img :src="src" v-show="false" alt="" />
     </template>
     <DetailModal :info="rowInfo" @register="registerModal" />
     <BasicTable @register="register" class="error-handle-table">
@@ -35,7 +35,7 @@
 <script lang="ts" setup>
   import type { ErrorLogInfo } from '/#/store';
   import { watch, ref, nextTick } from 'vue';
-  import DetailModal from './detailModal.vue';
+  import DetailModal from './DetailModal.vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table/index';
   import { useModal } from '/@/components/Modal';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -57,6 +57,7 @@
       width: 80,
       title: 'Action',
       dataIndex: 'action',
+      // slots: { customRender: 'action' },
     },
   });
   const [registerModal, { openModal }] = useModal();

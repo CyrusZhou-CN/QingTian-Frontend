@@ -1,4 +1,4 @@
-<div align="center"> <img alt="QingTian Logo" width="200" height="200" src="public\resource\img\logo.svg"></div>
+<div align="center"> <img alt="QingTian Logo" width="200" height="200" src="logo.svg"></div>
 <h1>QingTian 前端</h1>
 </div>
 

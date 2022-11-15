@@ -2,6 +2,7 @@ export default {
   api: {
     operationFailed: '操作失败',
     errorTip: '错误提示',
+    successTip: '成功提示',
     errorMessage: '操作失败,系统异常!',
     timeoutMessage: '登录超时,请重新登录!',
     apiTimeoutMessage: '接口请求超时,请刷新页面重试!',
@@ -88,7 +89,7 @@ export default {
     policyPlaceholder: '勾选后才能注册',
     diffPwd: '两次输入密码不一致',
 
-    account: '账号',
+    userName: '账号',
     password: '密码',
     confirmPassword: '确认密码',
     email: '邮箱',

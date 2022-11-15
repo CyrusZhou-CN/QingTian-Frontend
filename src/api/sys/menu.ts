@@ -18,7 +18,7 @@ enum Api {
  * @author QingTian
  * @date 2022-07-14 15:46:03
  */
-export const sysUserMenu = () => {
+export const getMenuList = () => {
   return defHttp.get<sysMenuListResultModel>({ url: Api.userMenu });
 };
 

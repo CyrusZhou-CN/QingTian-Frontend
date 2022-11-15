@@ -18,10 +18,11 @@ import { useI18n } from '/@/hooks/web/useI18n';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { useUserStoreWithOut } from '/@/store/modules/user';
 import { AxiosRetry } from '/@/utils/http/axios/axiosRetry';
+import axios from 'axios';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
-const { createMessage, createErrorModal } = useMessage();
+const { createMessage, createErrorModal, createSuccessModal } = useMessage();
 
 /**
  * @description: 数据处理，方便区分多种处理方式
@@ -56,10 +57,18 @@ const transform: AxiosTransform = {
     const hasSuccess =
       data &&
       Reflect.has(data, 'code') &&
-      (code === ResultEnum.SUCCESS_200 || code === ResultEnum.SUCCESS_204);
+      (code === ResultEnum.SUCCESS ||
+        code === ResultEnum.SUCCESS_200 ||
+        code === ResultEnum.SUCCESS_204);
     if (hasSuccess) {
-      if (!result) {
-        return data;
+      let successMsg = message;
+      if (successMsg === null || successMsg === undefined || successMsg === '') {
+        successMsg = '操作成功';
+      }
+      if (options.successMessageMode === 'modal') {
+        createSuccessModal({ title: t('sys.api.successTip'), content: successMsg });
+      } else if (options.successMessageMode === 'message') {
+        createMessage.success(successMsg);
       }
       return result;
     }
@@ -80,19 +89,15 @@ const transform: AxiosTransform = {
         }
     }
 
-    // errorMessageMode=‘modal’的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
+    // errorMessageMode='modal'的时候会显示modal错误弹窗，而不是消息提示，用于一些比较重要的错误
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
     if (options.errorMessageMode === 'modal') {
       createErrorModal({ title: t('sys.api.errorTip'), content: timeoutMsg });
     } else if (options.errorMessageMode === 'message') {
-      if (typeof timeoutMsg == 'string') {
-        createMessage.error(timeoutMsg);
-      } else {
-        createMessage.error(JSON.stringify(timeoutMsg));
-      }
+      createMessage.error(timeoutMsg);
     }
 
-    throw new Error(JSON.stringify(timeoutMsg) || t('sys.api.apiRequestFailed'));
+    throw new Error(timeoutMsg || t('sys.api.apiRequestFailed'));
   },
 
   // 请求之前处理config
@@ -182,6 +187,10 @@ const transform: AxiosTransform = {
     const msg: string = response?.data?.error?.message ?? '';
     const err: string = error?.toString?.() ?? '';
     let errMessage = '';
+
+    if (axios.isCancel(error)) {
+      return Promise.reject(error);
+    }
 
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
